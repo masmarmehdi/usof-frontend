@@ -1,0 +1,84 @@
+.nav-bar {
+  width: 100%;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  background-color: #14274e;
+  color: #f1f6f9;
+  z-index: 999;
+}
+.navlink-left,
+.navlink-right {
+  flex: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.social-icon {
+  font-size: 20px;
+  margin-left: 20px;
+}
+.navlink-center {
+  flex: 6;
+}
+
+.user-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.logo-img {
+  background-color: #f1f6f9;
+  padding: 10px;
+  width: 150px;
+  height: auto;
+}
+.nav-list {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  margin-left: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.search-icon {
+  font-size: 18px;
+  color: #f1f6f9;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.logout-btn {
+  border: 0;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #f1f6f9;
+  color: #394867;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  margin: 25px;
+}
+.logout-btn:hover {
+  background: #ff2626;
+  color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.user-role {
+  margin-right: 10px;
+}
+.username {
+  margin-left: 10px;
+}
