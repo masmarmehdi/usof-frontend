@@ -1,0 +1,45 @@
+.settings {
+  display: flex;
+}
+
+.settings-wrapper {
+  flex: 9;
+}
+
+.settings-title {
+  display: flex;
+  justify-content: space-between;
+}
+span {
+  margin-top: 20px;
+  text-align: center;
+}
+.settings-form {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-around;
+}
+.settings-data {
+  display: flex;
+  flex-direction: column;
+}
+.settings-profile-picture {
+  display: flex;
+  flex-direction: column;
+}
+.profile-picture {
+  width: 300px;
+  border-radius: 50%;
+}
+.settings-file-input {
+  width: 70vw;
+  padding: 20px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #f1f6f9;
+}
+
+.settings-upload-picture {
+  display: flex;
+  justify-content: space-around;
+}
