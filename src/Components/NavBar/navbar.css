@@ -58,7 +58,9 @@
   margin-left: 15px;
 }
 
-.logout-btn {
+.logout-btn,
+.login-btn,
+.register-btn {
   border: 0;
   border-radius: 2px;
   padding: 10px 20px;
@@ -72,6 +74,14 @@
 .logout-btn:hover {
   background: #ff2626;
   color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.login-btn:hover,
+.register-btn:hover {
+  background: #a2dbfa;
+  color: #14274e;
   box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
   transition: 0.8s;
   border-radius: 5%;
