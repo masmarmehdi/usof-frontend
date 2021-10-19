@@ -1,35 +1,32 @@
+import { Link } from "react-router-dom";
 import "./post.css";
 
-export default function Post() {
+export default function Post({ post }) {
   return (
     <div className="post">
       <img
         className="post-img"
-        src="https://cdn.pixabay.com/photo/2016/11/14/05/21/children-1822688_960_720.jpg"
+        src={`http://localhost:8000/posts_picture/${post.images}`}
         alt=""
       />
       <div className="post-data">
         <div className="post-categories">
-          <li className="category">Study</li>
-          <li className="category">Sport</li>
+          {/* Adding multiple categories for a specific post (still not working)
+           {post.categories.map((category) => (
+            <li className="category">{category.title}</li>
+          ))} 
+          */}
+          <li className="category">{post.categories}</li>
         </div>
-        <span className="post-title">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
-        </span>
+        <Link to={`posts/${post.id}`} className="link">
+          <span className="post-title">{post.title} </span>
+        </Link>
         <hr />
-        <span className="post-date">2 hours ago</span>
+        <span className="post-date">
+          {new Date(post.created_at).toDateString()}
+        </span>
       </div>
-      <p className="post-content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et
-        suscipit odio, non aliquam felis. Vivamus dictum nisi eget finibus
-        finibus. Curabitur et ullamcorper nisi. Sed maximus euismod suscipit.
-        Nullam orci lectus, congue a arcu quis, ullamcorper pretium risus. Cras
-        laoreet a risus eget commodo. Orci varius natoque penatibus et magnis
-        dis parturient montes, nascetur ridiculus mus. Aliquam sed est sed augue
-        rhoncus molestie. Interdum et malesuada fames ac ante ipsum primis in
-        faucibus. Morbi viverra libero justo, ac tincidunt justo eleifend vel.
-        Nullam vestibulum orci dui, vitae semper nibh rhoncus vel.
-      </p>
+      <p className="post-content">{post.content}</p>
     </div>
   );
 }
