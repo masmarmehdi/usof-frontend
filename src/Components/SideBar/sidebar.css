@@ -77,9 +77,11 @@
   border-radius: 50%;
   background-color: #f1f6f9;
   color: #3b5998;
+  transition: 0.5s;
 }
 .twitter:hover {
   color: #1da1f2;
+  transition: 0.5s;
 }
 .instagram:hover {
   border-radius: 30%;
@@ -109,6 +111,7 @@
     #bc1888 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+  transition: 0.5s;
 }
 .copyright {
   margin-top: 50px;
