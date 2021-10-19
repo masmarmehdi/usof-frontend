@@ -6,12 +6,12 @@ import SinglePage from "./Pages/SinglePage/SinglePage";
 import PostCreate from "./Pages/PostCreate/PostCreate";
 import Settings from "./Pages/Settings/Settings";
 import Login from "./Pages/Login/Login";
-import Register from "./Pages/register/Register";
+import Register from "./Pages/Register/Register";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
   render() {
-    const user = false;
+    const user = false; // Testing Link component in the condditional statement for now
     return (
       <Router>
         <NavBar />
