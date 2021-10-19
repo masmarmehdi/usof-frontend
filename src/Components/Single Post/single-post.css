@@ -1,4 +1,4 @@
-.post {
+.single-post {
   flex: 9;
 }
 
@@ -44,10 +44,12 @@
 .post-author {
   display: flex;
   flex-direction: column;
+  color: #14274e;
 }
 .author-img {
   width: 100px;
   border-radius: 50%;
+  object-fit: cover;
 }
 .single-post-content {
   font-size: 18px;

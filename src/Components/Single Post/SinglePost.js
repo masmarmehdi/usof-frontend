@@ -1,63 +1,60 @@
 import "./single-post.css";
-import mmasmar from "../../images/mmasmar.png";
+import { useLocation } from "react-router";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function SinglePost() {
+  const location = useLocation();
+  const post_id = location.pathname.split("/")[2];
+  const [post, setpost] = useState({});
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    const fetch_post = async () => {
+      const response = await axios.get(
+        `http://localhost:8000/api/posts/${post_id}`
+      );
+      setpost(response.data);
+    };
+    fetch_post();
+  }, [post_id]);
+  const user_id = post.user_id;
+  useEffect(() => {
+    const fetch_user = async () => {
+      const response = await axios.get(
+        `http://localhost:8000/api/users/${user_id}`
+      );
+      setUser(response.data);
+    };
+    fetch_user();
+  }, [user_id]);
   return (
     <div className="single-post">
       <div className="single-post-wrapper">
-        <h1 className="single-post-title">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi quis
-          nibh at tellus molestie efficitur.
-        </h1>
+        <h1 className="single-post-title">{post.title}</h1>
         <div className="single-post-data">
           <span className="post-author">
-            <img className="author-img" src={mmasmar} alt="mmasmar" />
-            <b>mmasmar</b>
+            <img
+              className="author-img"
+              src={`http://localhost:8000/profile_pictures/${user.profilePicture}`}
+              alt={`${user.username}'s avatar`}
+            />
+            <b>{user.username}</b>
           </span>
-          <span className="single-post-date">1 hour ago</span>
+          <span className="single-post-date">
+            {new Date(post.created_at).toDateString()}
+          </span>
         </div>
         <img
           className="single-post-img"
-          src="https://cdn.pixabay.com/photo/2021/10/04/16/42/dog-6680642_960_720.jpg"
+          src={`http://localhost:8000/posts_picture/${post.images}`}
           alt="happy dog"
         />
-        <p className="single-post-content">
-          Lorem consectetur consectetur nulla sunt enim quis voluptate duis.
-          Aliqua occaecat cillum tempor dolore culpa commodo est aliqua quis
-          pariatur minim. Amet ipsum ut esse non proident dolor eiusmod est ea
-          do anim. Et esse do ullamco qui laborum aliquip in adipisicing.
-          Voluptate cillum in quis nulla tempor.
-          <br />
-          Vestibulum dictum, nunc eget consectetur fringilla, turpis mauris
-          semper sapien, eget rutrum ligula ipsum pharetra metus. Maecenas a
-          placerat turpis. Nam bibendum urna ut sollicitudin finibus. Curabitur
-          quis quam in odio viverra condimentum. Donec dignissim orci et
-          ultrices elementum. Ut vel tincidunt ante. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Aenean convallis, odio id venenatis consequat, neque lorem efficitur
-          est, faucibus aliquam urna tellus sed est. Maecenas convallis, elit
-          non tempor hendrerit, risus massa faucibus velit, quis sollicitudin
-          urna lectus a turpis. Maecenas ut magna rutrum, scelerisque mauris
-          vitae, luctus nisl. In scelerisque turpis vitae enim consectetur, quis
-          dignissim quam faucibus. Morbi dignissim vitae urna id ornare.
-          <br />
-          Vestibulum dictum, nunc eget consectetur fringilla, turpis mauris
-          semper sapien, eget rutrum ligula ipsum pharetra metus. Maecenas a
-          placerat turpis. Nam bibendum urna ut sollicitudin finibus. Curabitur
-          quis quam in odio viverra condimentum. Donec dignissim orci et
-          ultrices elementum. Ut vel tincidunt ante. Pellentesque habitant morbi
-          tristique senectus et netus et malesuada fames ac turpis egestas.
-          Aenean convallis, odio id venenatis consequat, neque lorem efficitur
-          est, faucibus aliquam urna tellus sed est. Maecenas convallis, elit
-          non tempor hendrerit, risus massa faucibus velit, quis sollicitudin
-          urna lectus a turpis. Maecenas ut magna rutrum, scelerisque mauris
-          vitae, luctus nisl. In scelerisque turpis vitae enim consectetur, quis
-          dignissim quam faucibus. Morbi dignissim vitae urna id ornare.
-        </p>
+        <p className="single-post-content">{post.content}</p>
         <div className="activity">
           <div>
-            <i class="far like fa-thumbs-up">100</i>
-            <i class="far dislike fa-thumbs-down">20</i>
+            <i class="far like fa-thumbs-up">{post.likes}</i>
+            <i class="far dislike fa-thumbs-down">{post.dislikes}</i>
           </div>
           <div>
             <i class="far comment fa-comments"></i>
