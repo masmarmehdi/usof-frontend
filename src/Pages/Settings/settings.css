@@ -1,40 +1,53 @@
 .settings {
   display: flex;
 }
-
+.settings-card {
+  margin: 0px 50px 20px 50px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #394867;
+}
 .settings-wrapper {
   flex: 9;
 }
-
+.settings-username,
+.settings-name,
+.settings-email {
+  margin-bottom: 20px;
+  font-size: 30px;
+  color: #f1f6f9;
+}
+.settings-input {
+  background-color: #f1f6f9;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+}
 .settings-title {
-  display: flex;
-  justify-content: space-between;
+  margin-left: 20px;
 }
-span {
-  margin-top: 20px;
-  text-align: center;
-}
+
 .settings-form {
-  margin-top: 50px;
+  margin-top: 20px;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
 }
 .settings-data {
+  flex: 9;
   display: flex;
   flex-direction: column;
 }
 .settings-profile-picture {
+  flex: 3;
   display: flex;
   flex-direction: column;
 }
 .profile-picture {
-  width: 300px;
+  width: 200px;
   border-radius: 50%;
 }
-.settings-file-input {
-  width: 70vw;
-  padding: 20px;
-  display: inline-block;
+.settings-upload-picture {
   cursor: pointer;
   background-color: #f1f6f9;
 }
@@ -42,4 +55,60 @@ span {
 .settings-upload-picture {
   display: flex;
   justify-content: space-around;
+  font-size: 20px;
+  padding: 10px;
+}
+.settings-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.settings-btn-submit,
+.settings-btn-cancel {
+  border: 0;
+  width: 20%;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #14274e;
+  color: #f1f6f9;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  margin: 25px;
+  cursor: pointer;
+}
+.settings-btn-cancel:hover,
+.settings-delete:hover {
+  background: #df254d;
+  color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.settings-btn-submit:hover {
+  background: #28df99;
+  color: #14274e;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+
+.settings-account {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-account > span {
+  font-size: 20px;
+  color: #f1f6f9;
+}
+.settings-delete {
+  border: 0;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #14274e;
+  color: #f1f6f9;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  cursor: pointer;
 }
