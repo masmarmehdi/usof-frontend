@@ -1,6 +1,17 @@
+import axios from "axios";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./sidebar.css";
 
 export default function SideBar() {
+  const [categories, setcategories] = useState([]);
+  useEffect(() => {
+    const fetch_categories = async () => {
+      const response = await axios.get("http://localhost:8000/api/categories/");
+      setcategories(response.data);
+    };
+    fetch_categories();
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebar-item">
@@ -15,14 +26,11 @@ export default function SideBar() {
       <div className="sidebar-item">
         <span className="sidebar-title">Categories</span>
         <ul className="sidebar-list">
-          <li className="sidebar-list-item">Laravel</li>
-          <li className="sidebar-list-item">React</li>
-          <li className="sidebar-list-item">PHP</li>
-          <li className="sidebar-list-item">JS</li>
-          <li className="sidebar-list-item">Python</li>
-          <li className="sidebar-list-item">C</li>
-          <li className="sidebar-list-item">C++</li>
-          <li className="sidebar-list-item">Java</li>
+          {categories.map((category) => (
+            <Link className="link" to="categories/:category_id/posts">
+              <li className="sidebar-list-item">{category.title}</li>
+            </Link>
+          ))}
         </ul>
       </div>
       <div className="sidebar-item">
