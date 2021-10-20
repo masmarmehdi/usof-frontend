@@ -7,7 +7,7 @@ import PostCreate from "./Pages/PostCreate/PostCreate";
 import Settings from "./Pages/Settings/Settings";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
   render() {
@@ -26,6 +26,12 @@ class App extends React.Component {
             <SinglePage />
           </Route>
           <Route path="/post/create">{user ? <PostCreate /> : <Login />}</Route>
+          <Route path="/users/:username">
+            {user ? <PostCreate /> : <Login />}
+          </Route>
+          <Route path="/categoroes/:category_id/posts">
+            {user ? <PostCreate /> : <Login />}
+          </Route>
         </Switch>
       </Router>
     );
