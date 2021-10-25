@@ -6,3 +6,7 @@ export const SUCCESS_LOGIN = (user) => ({
   type: "SUCCESS_LOGIN",
   payload: user,
 });
+
+export const LOGOUT = (user) => ({
+  type: "LOGOUT",
+});
