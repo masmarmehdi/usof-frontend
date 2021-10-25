@@ -1,11 +1,15 @@
 import React from "react";
 import "./navbar.css";
 import myblog from "../../images/MyBlog.png";
-import mmasmar from "../../images/mmasmar.png";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
 
 export default function NavBar() {
-  const user = false;
+  const { user, dispatch } = useContext(Context);
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <div className="nav-bar">
       <div className="navlink-left">
@@ -19,13 +23,13 @@ export default function NavBar() {
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="link" to="/">
-              Posts
+            <Link className="link" to="/post/create">
+              Create a post
             </Link>
           </li>
           <li className="nav-link">
-            <Link className="link" to="/">
-              Categories
+            <Link className="link" to="/settings">
+              Settings
             </Link>
           </li>
           <i className="search-icon fas fa-search"></i>
@@ -34,12 +38,18 @@ export default function NavBar() {
 
       {user ? (
         <div className="navlink-right">
-          <p className="user-role">Admin</p>
+          <p className="user-role">{user.user.role}</p>
           <Link className="link" to="/settings">
-            <img className="user-img" src={mmasmar} alt="" />
+            <img
+              className="user-img"
+              src={`http://127.0.0.1:8000/profile_pictures/${user.user.profilePicture}`}
+              alt=""
+            />
           </Link>
-          <p className="username">mmasmar</p>
-          <button class="logout-btn">Logout</button>
+          <p className="username">{user.user.username}</p>
+          <button class="logout-btn" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       ) : (
         <div className="navlink-right">
