@@ -2,6 +2,7 @@ import "./single-post.css";
 import { useLocation } from "react-router";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function SinglePost() {
   const location = useLocation();
@@ -32,24 +33,45 @@ export default function SinglePost() {
     <div className="single-post">
       <div className="single-post-wrapper">
         <h1 className="single-post-title">{post.title}</h1>
+
         <div className="single-post-data">
           <span className="post-author">
-            <img
-              className="author-img"
-              src={`http://localhost:8000/profile_pictures/${user.profilePicture}`}
-              alt={`${user.username}'s avatar`}
-            />
+            <Link className="link" to="users/:username">
+              <img
+                className="author-img"
+                src={`http://localhost:8000/profile_pictures/${user.profilePicture}`}
+                alt={`${user.username}'s avatar`}
+              />
+            </Link>
             <b>{user.username}</b>
           </span>
+          <div className="single-post-categories">
+            {post.categories
+              ? post.categories
+                  .split(" ")
+                  .map((category) => (
+                    <li className="single-post-category">{category}</li>
+                  ))
+              : null}
+          </div>
           <span className="single-post-date">
             {new Date(post.created_at).toDateString()}
           </span>
         </div>
-        <img
-          className="single-post-img"
-          src={`http://localhost:8000/posts_picture/${post.images}`}
-          alt="happy dog"
-        />
+        {post.images
+          ? post.images
+              .split("|")
+              .map((image) =>
+                image !== "" ? (
+                  <img
+                    key={image}
+                    className="single-post-img"
+                    src={`http://localhost:8000/posts_picture/${image}`}
+                    alt={`${user.username}'s post images`}
+                  />
+                ) : null
+              )
+          : null}
         <p className="single-post-content">{post.content}</p>
         <div className="activity">
           <div>

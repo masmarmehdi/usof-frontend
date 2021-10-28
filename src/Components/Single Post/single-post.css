@@ -58,3 +58,26 @@
 .single-post-content::first-letter {
   margin-left: 20px;
 }
+.single-post-categories {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.single-post-category {
+  font-size: 15px;
+  line-height: 20px;
+  margin-top: 10px;
+  background-color: #14274e;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #f1f6f9;
+  margin-right: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.single-post-category:hover {
+  background-color: #a2dbfa;
+  color: #14274e;
+  transition: 0.4s;
+}
