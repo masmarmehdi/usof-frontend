@@ -4,20 +4,29 @@ import "./post.css";
 export default function Post({ post }) {
   return (
     <div className="post">
-      <img
-        className="post-img"
-        src={`http://localhost:8000/posts_picture/${post.images}`}
-        alt=""
-      />
+      {post.images
+        ? post.images
+            .split("|")
+            .map((image) =>
+              image !== "" ? (
+                <img
+                  key={image}
+                  className="post-img"
+                  src={`http://localhost:8000/posts_picture/${image}`}
+                  alt="Avatar"
+                />
+              ) : null
+            )
+        : null}
       <div className="post-data">
         <div className="post-categories">
-          {/* Adding multiple categories for a specific post (still not working)
-           {post.categories.map((category) => (
-            <li className="category">{category.title}</li>
-          ))} 
-          */}
-          <li className="category">{post.categories}</li>
+          {post.categories
+            ? post.categories
+                .split(" ")
+                .map((category) => <li className="category">{category}</li>)
+            : null}
         </div>
+
         <Link to={`posts/${post.id}`} className="link">
           <span className="post-title">{post.title} </span>
         </Link>
