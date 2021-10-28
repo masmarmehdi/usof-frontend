@@ -2,25 +2,18 @@
   margin: 5px 0px 20px 20px;
   font-size: 30px;
 }
-
 .post-create {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding-top: 10px;
 }
-
 .post-form {
   position: relative;
 }
-.file_input {
-  width: 500px;
-}
 
 .form-group {
-  margin-left: 150px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .add-img-icon {
@@ -36,14 +29,14 @@
   background-color: #f1f6f9;
   font-size: 20px;
   border: none;
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 20px;
-  width: 70vw;
+  width: 80%;
 }
 
 .file_input {
-  width: 70vw;
-  padding: 20px;
+  width: 80%;
+  padding: 10px;
   display: inline-block;
   cursor: pointer;
   background-color: #f1f6f9;
@@ -86,8 +79,8 @@
 }
 
 .card {
-  margin: 0px 50px 20px 50px;
-  padding: 70px 0px 20px 0px;
+  width: 50%;
+  margin: 20px;
   border-radius: 10px;
   background-color: #394867;
 }
@@ -99,9 +92,12 @@
 
 .title,
 .categories,
-.content {
+.content,
+.status {
   margin-bottom: 20px;
-  font-size: 30px;
+  margin-top: 20px;
+
+  font-size: 20px;
   color: #f1f6f9;
 }
 
@@ -111,5 +107,28 @@
 }
 
 .required {
+  font-size: 18px;
   color: #df254d;
+  margin-bottom: 10px;
+}
+.post-status {
+  background-color: #f1f6f9;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 82%;
+}
+
+.preview-img {
+  width: 40%;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.previewed-images {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }

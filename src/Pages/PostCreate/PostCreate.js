@@ -1,114 +1,172 @@
+import axios from "axios";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 import "./post-create.css";
 
 export default function PostCreate() {
+  const [title, setTitle] = useState("");
+  const [categories, setCategories] = useState("");
+  const [status, setStatus] = useState("active");
+  const [state, setState] = useState({ images: [] });
+  const [errors, setErrors] = useState(false);
+
+  const [content, setContent] = useState("");
+
+  const { user } = useContext(Context);
+
+  const handleChange = (e) => {
+    const imagesArray = [];
+
+    for (let i = 0; i < e.target.files.length; i++) {
+      imagesArray.push(e.target.files[i]);
+    }
+    setState({
+      images: imagesArray,
+    });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = new FormData();
+    for (let i = 0; i < state.images.length; i++) {
+      data.append("images[]", state.images[i]);
+    }
+    data.append("title", title);
+    data.append("categories", categories);
+    data.append("content", content);
+    data.append("status", status);
+    data.append("user_id", user.user.id);
+    // try {
+    const response = await axios.post("http://127.0.0.1:8000/api/posts", data);
+    console.log(response.data.error);
+
+    if (response.data.error) {
+      setErrors(response.data.error);
+    } else {
+      response.data && window.location.replace("/login");
+    }
+    // console.log(response.errors);
+    // window.location.replace("/");
+    // } catch (error) {
+    // console.log(error);
+    // }/
+  };
   return (
-    <div className="post-create">
+    <div>
       <span class="page-title">Create a new post</span>
-      <div className="card">
-        <form className="post-form">
-          <div className="form-group">
-            <label for="title" className="title">
-              Title<span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Title"
-              className="post-create-input"
-              autoFocus={true}
-            />
-          </div>
-          <div className="form-group">
-            <label for="categories" className="categories">
-              Categories<span className="required">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="Categories"
-              className="post-create-input"
-              autoFocus={true}
-            />
-          </div>
-          <div className="form-group">
-            <label for="content" className="content">
-              Content<span className="required">*</span>
-            </label>
-            <textarea
-              placeholder="What's on your mind?"
-              type="text"
-              className="post-create-input post-text"
-            ></textarea>
-          </div>
-          <div className="form-group">
-            <label className="file_input">
-              <div className="upload-section">
-                <span>Upload picture(s)</span>
-                <i class=" add-img-icon fas fa-plus-circle"></i>
+      <div className="post-create">
+        <div className="card">
+          <form className="post-form" onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label for="title" className="title">
+                Title<span className="required">*</span>
+              </label>
+              {errors && <span className="required">{errors.title}</span>}
+              <input
+                type="text"
+                placeholder="Title"
+                className="post-create-input"
+                autoFocus={true}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <label for="categories" className="categories">
+                Categories<span className="required">*</span>
+              </label>
+              {errors && <span className="required">{errors.categories}</span>}
+
+              <input
+                type="text"
+                placeholder="Categories"
+                className="post-create-input"
+                autoFocus={true}
+                onChange={(e) => {
+                  setCategories(e.target.value);
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <label for="status" className="status">
+                Status<span></span>
+              </label>
+
+              <select
+                className="post-status"
+                value={status}
+                onChange={(e) => {
+                  setStatus(e.target.value);
+                }}
+              >
+                <option>active</option>
+                <option>inactive</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label for="content" className="content">
+                Content<span className="required">*</span>
+              </label>
+              {errors && <span className="required">{errors.content}</span>}
+
+              <textarea
+                placeholder="What's on your mind?"
+                type="text"
+                className="post-create-input post-text"
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+              ></textarea>
+            </div>
+            <div className="form-group">
+              <label className="file_input">
+                <div className="upload-section">
+                  {state.images.length === 0 ? (
+                    <span>Upload picture(s)</span>
+                  ) : (
+                    <span>{state.images.length} file(s) selected</span>
+                  )}
+                  <input
+                    type="file"
+                    id="file_input"
+                    style={{ display: "none" }}
+                    name="images"
+                    onChange={handleChange}
+                    multiple
+                  />
+                  <i class=" add-img-icon fas fa-plus-circle"></i>
+                </div>
+              </label>
+              <div className="previewed-images">
+                {state.images
+                  ? state.images.map((image) =>
+                      image !== "" ? (
+                        <img
+                          key={image}
+                          className="preview-img"
+                          src={URL.createObjectURL(image)}
+                          alt="images"
+                        />
+                      ) : null
+                    )
+                  : null}
               </div>
-            </label>
-            <input type="file" id="file_input" style={{ display: "none" }} />
-          </div>
-          ;
-          <div class="btn">
-            <button type="submit" className="post-cancel">
-              Go back
-            </button>
-            <button type="submit" className="post-submit">
-              Publish
-            </button>
-          </div>
-        </form>
+            </div>
+            ;
+            <div class="btn">
+              <button type="submit" className="post-cancel">
+                <Link className="link" to="/">
+                  Go back
+                </Link>
+              </button>
+              <button type="submit" className="post-submit">
+                Publish
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 }
-
-// import React, { useState } from 'react';
-// import Header from '../Components/HeaderComponent';
-// import Footer from '../Components/FooterComponent';
-// import { Link } from 'react-router-dom';
-// import "../css/createPost.css"
-// import { useHistory } from 'react-router';
-
-// function CreatePost(){
-//     const [title, setTitle] = useState(null)
-//     const [content, setContent] = useState(null)
-//     const [categories, setCategories] = useState(null)
-//     const [state, setState] = useState({selectedFile: "", responseArray: [],})
-//     const history = useHistory()
-//     const handleInputChange = (event) => {
-//         setState({
-//           selectedFile: event.target.files,
-//           responseArray:[]
-//         });
-//         document.querySelector('.selectfile').style.background = "#181b58"
-//         document.querySelector('.selectfile').style.color = "white"
-//         document.querySelector('.selectfile').innerHTML = "File(s) selected"
-//     }
-//     const formData = new FormData()
-//     function Create(){
-//         if(!title || !content || !categories){
-//             alert('Fields with (*) are required!')
-//         }else{
-//             if(localStorage.getItem('user-info')){
-//                 const createPostUrl = `http://127.0.0.1:8000/api/posts/`;
-//                 for (let i = 0; i < state.selectedFile.length; i++) {
-//                     formData.append("images[]", state.selectedFile[i]);
-//                 }
-//                 formData.append('title', title);
-//                 formData.append('categories', categories);
-//                 formData.append('content', content);
-//                 formData.append('user', localStorage.getItem('user-info'));
-//                 fetch(createPostUrl, {
-//                     method: 'POST',
-//                     body:  formData,
-//                 })
-//                 .then((result) => {
-//                     console.log('Success:', result);
-//                     alert('Post created successfully!')
-//                     history.push('/')
-//                 })
-//             }else{
-//                 alert('Login or register first!')
-//             }
-//         }
-//     }
