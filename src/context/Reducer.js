@@ -18,6 +18,17 @@ const LOGIN_REDUCER = (state, action) => {
         isFetching: false,
         error: false,
       };
+    case "START_USER_UPDATE":
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case "SUCCESS_USER_UPDATE":
+      return {
+        user: action.payload,
+        isFetching: false,
+        error: false,
+      };
     default:
       return state;
   }

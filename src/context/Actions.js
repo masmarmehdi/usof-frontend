@@ -10,3 +10,13 @@ export const SUCCESS_LOGIN = (user) => ({
 export const LOGOUT = (user) => ({
   type: "LOGOUT",
 });
+
+export const START_USER_UPDATE = (userCredentials) => ({
+  type: "START_USER_UPDATE",
+});
+
+export const SUCCESS_USER_UPDATE = (user) => ({
+  type: "SUCCESS_USER_UPDATE",
+  payload: user,
+});
+
