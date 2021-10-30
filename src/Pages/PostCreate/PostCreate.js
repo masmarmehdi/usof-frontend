@@ -27,7 +27,7 @@ export default function PostCreate() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
+    let data = new FormData();
     for (let i = 0; i < state.images.length; i++) {
       data.append("images[]", state.images[i]);
     }
@@ -36,20 +36,19 @@ export default function PostCreate() {
     data.append("content", content);
     data.append("status", status);
     data.append("user_id", user.user.id);
-    // try {
-    const response = await axios.post("http://127.0.0.1:8000/api/posts", data);
-    console.log(response.data.error);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/posts",
+        data
+      );
+      console.log(response.data.error);
 
-    if (response.data.error) {
-      setErrors(response.data.error);
-    } else {
-      response.data && window.location.replace("/login");
-    }
-    // console.log(response.errors);
-    // window.location.replace("/");
-    // } catch (error) {
-    // console.log(error);
-    // }/
+      if (response.data.error) {
+        setErrors(response.data.error);
+      } else {
+        response.data && window.location.replace("/");
+      }
+    } catch (error) {}
   };
   return (
     <div>
