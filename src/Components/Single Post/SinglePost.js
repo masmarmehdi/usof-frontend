@@ -58,10 +58,9 @@ export default function SinglePost() {
             {new Date(post.created_at).toDateString()}
           </span>
         </div>
-        {post.images
-          ? post.images
-              .split("|")
-              .map((image) =>
+        <div className="single-post-images">
+          {post.images
+            ? post.images.map((image) =>
                 image !== "" ? (
                   <img
                     key={image}
@@ -71,7 +70,8 @@ export default function SinglePost() {
                   />
                 ) : null
               )
-          : null}
+            : null}
+        </div>
         <p className="single-post-content">{post.content}</p>
         <div className="activity">
           <div>

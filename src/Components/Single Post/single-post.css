@@ -11,7 +11,7 @@
   width: 100%;
   height: 300px;
   border-radius: 5px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .single-post-title {
   text-align: center;
@@ -80,4 +80,8 @@
   background-color: #a2dbfa;
   color: #14274e;
   transition: 0.4s;
+}
+
+.single-post-images {
+  display: flex;
 }
