@@ -8,7 +8,7 @@ export default function Login() {
   const user_ref = useRef();
   const email_ref = useRef();
   const password_ref = useRef();
-  const { user, dispatch, isFetching } = useContext(Context);
+  const { dispatch } = useContext(Context);
   const [errors, setErrors] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -23,13 +23,13 @@ export default function Login() {
       email: email_ref.current.value,
       password: password_ref.current.value,
     });
-      dispatch({
-        type: "SUCCESS_LOGIN",
-      payload: response.data,
-    });
     if (response.data.error) {
       setErrors(response.data.error);
     } else {
+      dispatch({
+        type: "SUCCESS_LOGIN",
+        payload: response.data.user,
+      });
       response.data && window.location.replace("/");
     }
   };
@@ -38,7 +38,9 @@ export default function Login() {
       <div className="login-card">
         <p className="login-title">Login to start your session</p>
         <form className="login-form" onSubmit={handleSubmit}>
-          {errors && <div style={{ color: "red" }}>{errors}</div>}
+          {errors && (
+            <div style={{ color: "red", textAlign: "center" }}>{errors}</div>
+          )}
           <label className="login-username">Username</label>
           <input
             className="login-input"
@@ -60,7 +62,7 @@ export default function Login() {
             placeholder="Enter your password"
             ref={password_ref}
           />
-          <button className="login-submit" type="submit" disabled={isFetching}>
+          <button className="login-submit" type="submit">
             Login
           </button>
           <span className="anchor-login">
