@@ -23,8 +23,8 @@ export default function Login() {
       email: email_ref.current.value,
       password: password_ref.current.value,
     });
-    dispatch({
-      type: "SUCCESS_LOGIN",
+      dispatch({
+        type: "SUCCESS_LOGIN",
       payload: response.data,
     });
     if (response.data.error) {
