@@ -38,15 +38,15 @@ export default function NavBar() {
 
       {user ? (
         <div className="navlink-right">
-          <p className="user-role">{user.user.role}</p>
+          <p className="user-role">{user.role}</p>
           <Link className="link" to="/settings">
             <img
               className="user-img"
-              src={`http://127.0.0.1:8000/profile_pictures/${user.user.profilePicture}`}
+              src={`http://127.0.0.1:8000/profile_pictures/${user.profilePicture}`}
               alt=""
             />
           </Link>
-          <p className="username">{user.user.username}</p>
+          <p className="username">{user.username}</p>
           <button class="logout-btn" onClick={handleLogout}>
             Logout
           </button>
