@@ -7,6 +7,8 @@ import PostCreate from "./Pages/PostCreate/PostCreate";
 import Settings from "./Pages/Settings/Settings";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import UserProfile from "./Pages/UserProfile/UserProfile";
+
 import { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Context } from "./context/Context";
@@ -28,8 +30,8 @@ function App() {
           <SinglePage />
         </Route>
         <Route path="/post/create">{user ? <PostCreate /> : <Login />}</Route>
-        <Route path="/users/:username">
-          {user ? <PostCreate /> : <Login />}
+        <Route path="/users/:user_id">
+          {user ? <UserProfile /> : <Login />}
         </Route>
         <Route path="/categoroes/:category_id/posts">
           {user ? <PostCreate /> : <Login />}
