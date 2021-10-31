@@ -3,10 +3,10 @@
 }
 
 .single-post-wrapper {
+  border: 4px solid #14274e;
   padding: 20px;
-  padding-right: 0;
+  margin: 20px;
 }
-
 .single-post-img {
   width: 100%;
   height: 300px;
@@ -25,8 +25,22 @@
   display: flex;
   justify-content: space-between;
 }
+.like:hover {
+  color: #289672;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.dislike:hover {
+  color: #df254d;
+  transition: 0.5s;
+  cursor: pointer;
+}
 .like,
 .dislike {
+  /* background-color: #14274e; */
+  color: #14274e;
+  font-size: 25px;
+  margin-right: 40px;
   font-size: 25px;
   margin-right: 40px;
 }
@@ -40,16 +54,24 @@
   display: flex;
   justify-content: space-between;
   font-size: 16px;
+  border-bottom: 4px solid #a2dbfa;
 }
 .post-author {
   display: flex;
   flex-direction: column;
   color: #14274e;
 }
-.author-img {
+.author-img,
+.user-reply-img {
   width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
+  border: 3px solid transparent;
+}
+.author-img:hover {
+  border: 3px solid #14274e;
+  transition: 0.5s;
 }
 .single-post-content {
   font-size: 18px;
@@ -68,20 +90,63 @@
   font-size: 15px;
   line-height: 20px;
   margin-top: 10px;
-  background-color: #14274e;
+  background-color: #a2dbfa;
   padding: 10px 20px;
   border-radius: 5px;
-  color: #f1f6f9;
+  color: #14274e;
   margin-right: 10px;
   text-align: center;
   cursor: pointer;
 }
 .single-post-category:hover {
-  background-color: #a2dbfa;
-  color: #14274e;
+  background-color: #14274e;
+  color: #f1f6f9;
   transition: 0.4s;
 }
 
 .single-post-images {
   display: flex;
+}
+
+.author-username {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+}
+.author-username:hover {
+  color: #f1f6f9;
+  background-color: #14274e;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.count {
+  margin-left: 10px;
+}
+
+.comments-section {
+  border: 3px solid #14274e;
+  padding: 10px;
+  margin: 60px;
+}
+#show-comments {
+  display: none;
+}
+.comment-like:hover {
+  color: #289672;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.comment-dislike:hover {
+  color: #df254d;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.comment-like,
+.comment-dislike {
+  /* background-color: #14274e; */
+  color: #14274e;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-right: 20px;
 }
