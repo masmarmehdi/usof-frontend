@@ -22,10 +22,7 @@ export default function Settings() {
 
     pictureData.append("profilePicture", profilePicture);
     pictureData.append("user_id", user.id);
-    dispatch({
-      type: "SUCCESS_USER_UPDATE",
-      payload: user,
-    });
+
     dispatch({ type: "START_USER_UPDATE" });
 
     const response = await axios.post(
@@ -33,6 +30,10 @@ export default function Settings() {
       pictureData
     );
     if (!response.data.error) {
+      dispatch({
+        type: "SUCCESS_USER_UPDATE",
+        payload: response.data.user,
+      });
       console.log(response.data.user);
       setPictureSuccess(response.data.success);
       setTimeout(() => {
