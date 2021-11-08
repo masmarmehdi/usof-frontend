@@ -13,3 +13,15 @@
   text-decoration: none;
   color: #f1f6f9;
 }
+.page-link:hover {
+  text-decoration: none;
+  color: #14274e;
+}
+.page-item:hover {
+  list-style: none;
+  background-color: #a2dbfa;
+  color: #14274e;
+
+  transition: 0.5s;
+  cursor: pointer;
+}
