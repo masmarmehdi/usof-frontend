@@ -9,6 +9,7 @@ export default function SideBar() {
     const fetch_categories = async () => {
       const response = await axios.get("http://localhost:8000/api/categories/");
       setcategories(response.data);
+      // console.log(response.data.slice(0, 5));
     };
     fetch_categories();
   }, []);
@@ -26,8 +27,8 @@ export default function SideBar() {
       <div className="sidebar-item">
         <span className="sidebar-title">Categories</span>
         <ul className="sidebar-list">
-          {categories.map((category) => (
-            <Link className="link" to="categories/:category_id/posts">
+          {categories.slice(0, 10).map((category) => (
+            <Link className="link" to={`/categories/${category.id}/posts`}>
               <li className="sidebar-list-item">{category.title}</li>
             </Link>
           ))}
