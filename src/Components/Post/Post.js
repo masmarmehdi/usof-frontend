@@ -7,6 +7,7 @@ export default function Post({ post }) {
       {post.images
         ? post.images
             .split("|")
+            .slice(0, 1)
             .map((image) =>
               image !== "" ? (
                 <img
@@ -23,11 +24,12 @@ export default function Post({ post }) {
           {post.categories
             ? post.categories
                 .split(" ")
+
                 .map((category) => <li className="category">{category}</li>)
             : null}
         </div>
 
-        <Link to={`posts/${post.id}`} className="link">
+        <Link to={`/posts/${post.id}`} className="link">
           <span className="post-title">{post.title} </span>
         </Link>
         <hr />
