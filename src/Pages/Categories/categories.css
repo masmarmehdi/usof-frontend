@@ -1,0 +1,30 @@
+.categories-div {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.categories-display {
+  flex: 9;
+  flex-wrap: wrap;
+  display: flex;
+  /* justify-content: space-around; */
+}
+
+.category-card {
+  background-color: #14274e;
+  color: #f4f5f5;
+  /* width: 100px; */
+  font-size: 20px;
+  padding: 20px;
+  margin-left: 10px;
+}
+.category-card:hover {
+  background-color: #a2dbfa;
+  color: #14274e;
+  /* width: 100px; */
+  font-size: 20px;
+  padding: 20px;
+  margin-left: 10px;
+  transition: 0.5s;
+}
