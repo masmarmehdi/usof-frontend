@@ -10,15 +10,18 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const fetch_posts = () => {
-      axios.get("http://localhost:8000/api/posts").then((response) => {
+    axios
+      .get("http://localhost:8000/api/posts")
+      .then((response) => {
         setPosts(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    };
-    fetch_posts();
-  });
+  }, []);
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -29,15 +32,16 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
       <div className="home">
-        <Posts posts={currentPosts} />
+        {loading ? (
+          <div className="loader">Loading</div>
+        ) : (
+          <>
+            <Posts posts={currentPosts} />
 
-        <SideBar />
+            <SideBar />
+          </>
+        )}
       </div>
       <Pagination
         postsPerPage={postsPerPage}
