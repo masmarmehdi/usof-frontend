@@ -152,7 +152,7 @@ export default function NavBar() {
           <p className="user-role">
             {user.role === "admin" ? (
               <a
-                className="link"
+                className="link nav-link"
                 href="http://127.0.0.1:8000/admin"
                 target="_blank"
                 rel="noreferrer"
@@ -170,7 +170,10 @@ export default function NavBar() {
               alt=""
             />
           </Link>
-          <p className="username">{user.username}</p>
+          <Link className="link nav-link" to={`/users/${user.id}`}>
+            <span>{user.username}</span>
+          </Link>
+
           <button class="logout-btn" onClick={handleLogout}>
             Logout
           </button>

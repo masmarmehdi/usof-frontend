@@ -51,7 +51,9 @@
   font-weight: 300;
   cursor: pointer;
 }
-
+.nav-link:hover {
+  border-bottom: 1px solid #a2dbfa;
+}
 .search-icon {
   font-size: 18px;
   color: #f1f6f9;
@@ -89,9 +91,6 @@
 }
 .user-role {
   margin-right: 10px;
-}
-.username {
-  margin-left: 10px;
 }
 
 .search-bar {
