@@ -12,6 +12,9 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import { useContext } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Context } from "./context/Context";
+import PostsByCategory from "./Pages/PostsByCategory/PostsByCategory";
+import Categories from "./Pages/Categories/Categories";
+import UserPosts from "./Pages/UserPosts/UserPosts";
 
 function App() {
   const { user } = useContext(Context);
@@ -30,11 +33,15 @@ function App() {
           <SinglePage />
         </Route>
         <Route path="/post/create">{user ? <PostCreate /> : <Login />}</Route>
-        <Route path="/users/:user_id">
-          {user ? <UserProfile /> : <Login />}
+        <Route exact path="/users/:user_id">
+          {user && <UserProfile />}
         </Route>
-        <Route path="/categoroes/:category_id/posts">
-          {user ? <PostCreate /> : <Login />}
+        <Route path="/users/:user_id/posts">{user && <UserPosts />}</Route>
+        <Route path="/categories/:category_id/posts">
+          <PostsByCategory />
+        </Route>
+        <Route path="/categories">
+          <Categories />
         </Route>
       </Switch>
     </Router>
