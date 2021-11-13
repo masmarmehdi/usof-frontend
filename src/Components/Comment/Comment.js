@@ -1,11 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import LikeDislike from "../LikeDislike/LikeDislike";
 
 export default function Comment({ comment, post }) {
   const [user, setUser] = useState({});
   const user_id = comment.user_id;
-  console.log(comment);
+  // console.log(comment);
   useEffect(() => {
     const fetch_user = async () => {
       const response = await axios.get(
@@ -34,11 +35,15 @@ export default function Comment({ comment, post }) {
             {comment.content}
           </p>
           <div>
+            {/* <LikeDislike type="dislike" comment_id={comment.id} /> */}
+
             <i class="fas comment-like fa-thumbs-up ">
-              <span className="count">{post.likes}</span>
+              <span className="count">{comment.likes}</span>
             </i>
+            {/* <LikeDislike type="dislike" comment_id={comment.id} /> */}
+
             <i class="fas comment-dislike fa-thumbs-down ">
-              <span className="count">{post.dislikes}</span>
+              <span className="count">{comment.dislikes}</span>
             </i>
           </div>
         </div>

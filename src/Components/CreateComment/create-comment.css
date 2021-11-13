@@ -1,0 +1,9 @@
+.comment-input {
+  padding: 10px 5px;
+  width: 90%;
+}
+.create-comment {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
