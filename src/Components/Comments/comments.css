@@ -1,0 +1,24 @@
+.comments-section {
+  border: 3px solid #14274e;
+  padding: 10px;
+  margin: 60px;
+}
+
+.comment-like:hover {
+  color: #289672;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.comment-dislike:hover {
+  color: #df254d;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.comment-like,
+.comment-dislike {
+  /* background-color: #14274e; */
+  color: #14274e;
+  font-size: 18px;
+  margin-right: 20px;
+  margin-right: 20px;
+}
