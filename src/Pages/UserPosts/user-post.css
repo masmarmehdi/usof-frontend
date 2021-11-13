@@ -1,0 +1,19 @@
+.user-posts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.posts-by-user {
+  flex: 9;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+.error {
+  font-size: 40px;
+}
+.post-by-user {
+  flex: 9;
+  display: flex;
+  width: 100%;
+}
