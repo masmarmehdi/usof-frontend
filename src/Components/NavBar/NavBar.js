@@ -14,31 +14,20 @@ export default function NavBar() {
   const [categories, setCategories] = useState(null);
 
   useEffect(() => {
-    const fetch_posts = async () => {
-      await axios.get("http://127.0.0.1:8000/api/posts").then((response) => {
-        setPosts(response.data);
-      });
-    };
-    fetch_posts();
-  });
+    axios.get("http://127.0.0.1:8000/api/posts").then((response) => {
+      setPosts(response.data);
+    });
+  }, []);
   useEffect(() => {
-    const fetch_users = async () => {
-      await axios.get("http://127.0.0.1:8000/api/users").then((response) => {
-        setUsers(response.data);
-      });
-    };
-    fetch_users();
-  });
+    axios.get("http://127.0.0.1:8000/api/users").then((response) => {
+      setUsers(response.data);
+    });
+  }, []);
   useEffect(() => {
-    const fetch_categories = async () => {
-      await axios
-        .get("http://127.0.0.1:8000/api/categories")
-        .then((response) => {
-          setCategories(response.data);
-        });
-    };
-    fetch_categories();
-  });
+    axios.get("http://127.0.0.1:8000/api/categories").then((response) => {
+      setCategories(response.data);
+    });
+  }, []);
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
   };
