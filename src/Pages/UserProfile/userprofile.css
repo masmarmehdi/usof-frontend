@@ -39,3 +39,10 @@
   justify-content: center;
   align-items: center;
 }
+.users-post-link {
+  color: #f1f6f9;
+}
+
+.users-post-link:hover {
+  border-bottom: 1px solid #f1f6f9;
+}
