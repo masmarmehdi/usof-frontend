@@ -35,13 +35,13 @@ export default function PostCreate() {
     data.append("categories", categories);
     data.append("content", content);
     data.append("status", status);
-    data.append("user_id", user.user.id);
+    data.append("user_id", user.id);
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/posts",
         data
       );
-      console.log(response.data.error);
+      console.log(response.data);
 
       if (response.data.error) {
         setErrors(response.data.error);
@@ -50,6 +50,7 @@ export default function PostCreate() {
       }
     } catch (error) {}
   };
+  
   return (
     <div>
       <span class="page-title">Create a new post</span>
