@@ -16,6 +16,7 @@ export default function PostsByCategory() {
 
   const location = useLocation();
   const category_id = location.pathname.split("/")[2];
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetch_category_posts = async () => {
       const response = await axios.get(
@@ -27,6 +28,7 @@ export default function PostsByCategory() {
         setError(false);
         setCategories(response.data);
         setCategoryName(response.data[0].categories);
+        setLoading(false);
       }
     };
     fetch_category_posts();
@@ -41,28 +43,33 @@ export default function PostsByCategory() {
   return (
     <div>
       {!error ? <h2>All posts related to {category_name}</h2> : <span></span>}
-      <div className="categories-posts">
+      <div className="post-by-category">
         {error ? (
           <div className="posts-by-category">
             <p className="error">{error}</p>
+            <SideBar />
           </div>
+        ) : loading ? (
+          <div className="loader">Loading</div>
         ) : (
-          <div>
-            <Pagination
-              postsPerPage={postsPerPage}
-              totalPosts={posts.length}
-              paginate={paginate}
-            />
-            <div className="categories-posts">
-              <div className="posts-by-category">
-                {categories.map((currentPosts) => (
-                  <Post post={currentPosts} />
-                ))}
+          <div className="categories-posts">
+            <div>
+              <Pagination
+                postsPerPage={postsPerPage}
+                totalPosts={posts.length}
+                paginate={paginate}
+              />
+              <div className="categories-posts">
+                <div className="posts-by-category" posts={currentPosts}>
+                  {categories.map((post) => (
+                    <Post key={post.id} post={post} />
+                  ))}
+                </div>
               </div>
             </div>
+            <SideBar />
           </div>
         )}
-        <SideBar />
       </div>
     </div>
   );

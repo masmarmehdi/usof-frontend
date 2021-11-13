@@ -12,3 +12,8 @@
 .error {
   font-size: 40px;
 }
+.post-by-category {
+  flex: 9;
+  display: flex;
+  width: 100%;
+}
