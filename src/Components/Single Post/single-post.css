@@ -29,7 +29,8 @@
   display: flex;
   justify-content: space-between;
 }
-.like:hover {
+.like:hover,
+.like:active {
   color: #289672;
   transition: 0.5s;
   cursor: pointer;
@@ -127,8 +128,12 @@
 
 .count {
   margin-left: 10px;
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
 }
 #show-comments {
   display: none;
 }
-

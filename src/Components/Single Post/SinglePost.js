@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Comments from "../Comments/Comments";
 import CreateComment from "../CreateComment/CreateComment";
-// import LikeDislike from "../LikeDislike/LikeDislike";
+import CreatePostLikeDislike from "../CreatePostLikeDislike/CreatePostLikeDislike";
 
 export default function SinglePost() {
   const location = useLocation();
@@ -22,7 +22,6 @@ export default function SinglePost() {
     });
   }, [post_id]);
   const user_id = post.user_id;
-  // console.log(post);
   useEffect(() => {
     axios.get(`http://localhost:8000/api/users/${user_id}`).then((response) => {
       setUser(response.data);
@@ -104,17 +103,7 @@ export default function SinglePost() {
             </div>
 
             <div className="activity">
-              <div>
-                <i class="fas like fa-thumbs-up ">
-                  {/* <LikeDislike type="like" post_id={post_id} /> */}
-                  <span className="count">{post.likes}</span>
-                </i>
-                <i class="fas dislike fa-thumbs-down ">
-                  {/* <LikeDislike type="dislike" post_id={post_id} /> */}
-                  <span className="count">{post.dislikes}</span>
-                </i>
-              </div>
-
+              <CreatePostLikeDislike post={post} post_id={post_id} />
               <div onClick={handleComments} style={{ cursor: "pointer" }}>
                 <i class="far comment fa-comments">
                   <span className="count">{comments.length}</span>
@@ -123,7 +112,7 @@ export default function SinglePost() {
             </div>
             <CreateComment post_id={post_id} />
             <Comments
-              // className="show-comments"
+              className="show-comments"
               post={post}
               comments={comments}
             />
