@@ -4,30 +4,18 @@ import { Link } from "react-router-dom";
 import "./sidebar.css";
 
 export default function SideBar() {
-  const [categories, setcategories] = useState([]);
+  const [categories, setcategories] = useState([{}]);
   useEffect(() => {
-    const fetch_categories = async () => {
-      const response = await axios.get("http://localhost:8000/api/categories/");
+    axios.get("http://localhost:8000/api/categories/").then((response) => {
       setcategories(response.data);
-      // console.log(response.data.slice(0, 5));
-    };
-    fetch_categories();
+    });
   }, []);
   return (
     <div className="sidebar">
       <div className="sidebar-item">
-        <span className="sidebar-title">Posts</span>
-        <ul className="sidebar-list">
-          <li className="sidebar-list-item">Recent posts</li>
-          <li className="sidebar-list-item">Popular posts</li>
-          <li className="sidebar-list-item">Must read posts</li>
-          <li className="sidebar-list-item">Most liked posts</li>
-        </ul>
-      </div>
-      <div className="sidebar-item">
         <span className="sidebar-title">Categories</span>
         <ul className="sidebar-list">
-          {categories.slice(0, 10).map((category) => (
+          {categories.slice(0, 20).map((category) => (
             <Link className="link" to={`/categories/${category.id}/posts`}>
               <li className="sidebar-list-item">{category.title}</li>
             </Link>

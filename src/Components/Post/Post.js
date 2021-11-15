@@ -24,7 +24,6 @@ export default function Post({ post }) {
           {post.categories
             ? post.categories
                 .split(" ")
-
                 .map((category) => <li className="category">{category}</li>)
             : null}
         </div>
