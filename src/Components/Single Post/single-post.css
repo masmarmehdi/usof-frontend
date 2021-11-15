@@ -13,6 +13,10 @@
   border-radius: 5px;
   object-fit: contain;
 }
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+}
 .single-post-title {
   text-align: center;
   margin: 10px;
@@ -106,6 +110,7 @@
 
 .single-post-images {
   display: flex;
+  justify-content: center;
 }
 
 .author-username {
@@ -123,30 +128,7 @@
 .count {
   margin-left: 10px;
 }
-
-.comments-section {
-  border: 3px solid #14274e;
-  padding: 10px;
-  margin: 60px;
-}
 #show-comments {
   display: none;
 }
-.comment-like:hover {
-  color: #289672;
-  transition: 0.5s;
-  cursor: pointer;
-}
-.comment-dislike:hover {
-  color: #df254d;
-  transition: 0.5s;
-  cursor: pointer;
-}
-.comment-like,
-.comment-dislike {
-  /* background-color: #14274e; */
-  color: #14274e;
-  font-size: 18px;
-  margin-right: 20px;
-  margin-right: 20px;
-}
+
