@@ -137,3 +137,8 @@
 #show-comments {
   display: none;
 }
+
+.single-post-header {
+  display: flex;
+  justify-content: space-between;
+}

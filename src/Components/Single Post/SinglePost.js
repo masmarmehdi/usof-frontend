@@ -1,19 +1,22 @@
 import "./single-post.css";
-import { useLocation } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Comments from "../Comments/Comments";
 import CreateComment from "../CreateComment/CreateComment";
 import CreatePostLikeDislike from "../CreatePostLikeDislike/CreatePostLikeDislike";
+import { Context } from "../../context/Context";
 
 export default function SinglePost() {
+  const auth_user = useContext(Context);
   const location = useLocation();
   const post_id = location.pathname.split("/")[2];
   const [post, setpost] = useState({});
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     axios.get(`http://localhost:8000/api/posts/${post_id}`).then((response) => {
@@ -45,6 +48,16 @@ export default function SinglePost() {
       display = false;
     }
   };
+
+  const deletePost = async () => {
+    await axios
+      .delete(`http://localhost:8000/api/posts/${post_id}`, {
+        user_id: user.id,
+      })
+      .then((response) => {
+        response.data && history.push(`/users/${user.id}/posts`);
+      });
+  };
   return (
     <div className="single-post">
       {loading ? (
@@ -55,8 +68,14 @@ export default function SinglePost() {
             {user.username}'s post about {post.categories}
           </h1>
           <div className="single-post-wrapper">
-            <h1 className="single-post-title">{post.title}</h1>
-
+            <div className="single-post-header">
+              <h1 className="single-post-title">{post.title}</h1>
+              {post.user_id === auth_user.user.id && (
+                <div>
+                  <button onClick={deletePost}>Delete</button>
+                </div>
+              )}
+            </div>
             <div className="single-post-data">
               <span className="post-author">
                 <Link className="link" to={"/users/" + post.user_id}>
