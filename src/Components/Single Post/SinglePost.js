@@ -72,7 +72,15 @@ export default function SinglePost() {
               <h1 className="single-post-title">{post.title}</h1>
               {post.user_id === auth_user.user.id && (
                 <div>
-                  <button onClick={deletePost}>Delete</button>
+                  <Link
+                    className="link update-post-btn"
+                    to={`/posts/${post.id}/update`}
+                  >
+                    Update
+                  </Link>
+                  <span className="delete-post-btn" onClick={deletePost}>
+                    Delete
+                  </span>
                 </div>
               )}
             </div>

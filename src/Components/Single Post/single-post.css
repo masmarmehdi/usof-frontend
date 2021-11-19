@@ -142,3 +142,34 @@
   display: flex;
   justify-content: space-between;
 }
+
+.update-post-btn,
+.delete-post-btn {
+  border: 0;
+  width: 20%;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #14274e;
+  color: #f1f6f9;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  margin: 25px;
+  cursor: pointer;
+}
+
+.update-post-btn:hover {
+  background: #e9ac29;
+  color: #14274e;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+
+.delete-post-btn:hover {
+  background: #df254d;
+  color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
