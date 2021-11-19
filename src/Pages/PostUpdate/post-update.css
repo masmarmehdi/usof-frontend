@@ -1,0 +1,134 @@
+.page-title {
+  margin: 5px 0px 20px 20px;
+  font-size: 30px;
+}
+.post-update {
+  display: flex;
+  justify-content: center;
+}
+.post-form {
+  position: relative;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-img-icon {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #14274e;
+  cursor: pointer;
+}
+
+.post-update-input {
+  background-color: #f1f6f9;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 80%;
+}
+
+.file_input {
+  width: 80%;
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+  background-color: #f1f6f9;
+}
+.post-update-input:focus {
+  outline: none;
+}
+
+.post-text {
+  font-size: 20px;
+}
+
+.post-cancel,
+.post-submit {
+  border: 0;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #14274e;
+  color: #f1f6f9;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  margin: 25px;
+  cursor: pointer;
+}
+
+.post-submit:hover {
+  background: #28df99;
+  color: #14274e;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.post-cancel:hover {
+  background: #df254d;
+  color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+
+.card {
+  width: 50%;
+  margin: 20px;
+  border-radius: 10px;
+  background-color: #394867;
+}
+
+.btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title,
+.categories,
+.content,
+.status {
+  margin-bottom: 20px;
+  margin-top: 20px;
+
+  font-size: 20px;
+  color: #f1f6f9;
+}
+
+.upload-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.required {
+  font-size: 18px;
+  color: #df254d;
+  margin-bottom: 10px;
+}
+.post-status {
+  background-color: #f1f6f9;
+  font-size: 20px;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 82%;
+}
+
+.preview-img {
+  width: 40%;
+  object-fit: contain;
+  margin-right: 10px;
+}
+
+.previewed-images {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
