@@ -35,7 +35,9 @@ export default function CreateComment({ post_id }) {
             placeholder="Tell your opinion about this post"
             onChange={(e) => setContent(e.target.value)}
           />
-          <button type="submit">Comment</button>
+          <button className="submit-comment" type="submit">
+            Comment
+          </button>
         </div>
       </form>
     </div>
