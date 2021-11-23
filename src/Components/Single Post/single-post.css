@@ -29,8 +29,7 @@
   display: flex;
   justify-content: space-between;
 }
-.like:hover,
-.like:active {
+.like:hover {
   color: #289672;
   transition: 0.5s;
   cursor: pointer;
