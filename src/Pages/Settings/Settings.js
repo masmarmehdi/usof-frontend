@@ -17,25 +17,23 @@ export default function Settings() {
   };
   const handlePictureSubmit = async (e) => {
     e.preventDefault();
+    dispatch({ type: "START_USER_UPDATE" });
 
     let pictureData = new FormData();
-
     pictureData.append("profilePicture", profilePicture);
     pictureData.append("user_id", user.id);
-
-    dispatch({ type: "START_USER_UPDATE" });
 
     const response = await axios.post(
       `http://localhost:8000/api/auth/profilePicture/`,
       pictureData
     );
     if (!response.data.error) {
+      console.log(response.data.user);
+      setPictureSuccess(response.data.success);
       dispatch({
         type: "SUCCESS_USER_UPDATE",
         payload: response.data.user,
       });
-      console.log(response.data.user);
-      setPictureSuccess(response.data.success);
       setTimeout(() => {
         setPictureSuccess(false);
         window.location.reload();
@@ -81,7 +79,7 @@ export default function Settings() {
             <button class="settings-delete">Delete account</button>
           </div>
           <form className="settings-form" onSubmit={handlePictureSubmit}>
-            <input type="hidden" name="user_id" />
+            <input type="hidden" name="user_id" value={user.id} />
             <div className="settings-profile-picture">
               {error && <span>{error}</span>}
               {pictureSuccess && (
