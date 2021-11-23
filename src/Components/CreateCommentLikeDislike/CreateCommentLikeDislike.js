@@ -2,7 +2,11 @@ import axios from "axios";
 import React, { useContext } from "react";
 import { Context } from "../../context/Context";
 
-export default function CreateCommentLikeDislike({ comment_id, comment }) {
+export default function CreateCommentLikeDislike({
+  post_id,
+  comment_id,
+  comment,
+}) {
   const { user } = useContext(Context);
 
   const createCommentLike = () => {
@@ -13,7 +17,7 @@ export default function CreateCommentLikeDislike({ comment_id, comment }) {
         user_id: user.id,
       })
       .then((response) => {
-        console.log(response.data);
+        response.data && window.location.replace(`/posts/${post_id}`);
       });
   };
   const createCommentDislike = () => {
