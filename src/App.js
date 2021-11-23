@@ -15,6 +15,7 @@ import { Context } from "./context/Context";
 import PostsByCategory from "./Pages/PostsByCategory/PostsByCategory";
 import Categories from "./Pages/Categories/Categories";
 import UserPosts from "./Pages/UserPosts/UserPosts";
+import PostUpdate from "./Pages/PostUpdate/PostUpdate";
 
 function App() {
   const { user } = useContext(Context);
@@ -29,8 +30,11 @@ function App() {
         <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
         <Route path="/login">{user ? <Home /> : <Login />}</Route>
         <Route path="/register">{user ? <Home /> : <Register />}</Route>
-        <Route path="/posts/:post_id">
+        <Route exact path="/posts/:post_id">
           <SinglePage />
+        </Route>
+        <Route path="/posts/:post_id/update">
+          {user ? <PostUpdate /> : <Login />}
         </Route>
         <Route path="/post/create">{user ? <PostCreate /> : <Login />}</Route>
         <Route exact path="/users/:user_id">
