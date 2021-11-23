@@ -13,9 +13,10 @@ export default function CreatePostLikeDislike({ post, post_id }) {
         user_id: user.id,
       })
       .then((response) => {
-        console.log(response.data);
+        response.data && window.location.replace(`/posts/${post_id}`);
       });
   };
+
   const createPostDislike = () => {
     axios
       .post(`http://127.0.0.1:8000/api/posts/${post_id}/dislike`, {
@@ -24,7 +25,7 @@ export default function CreatePostLikeDislike({ post, post_id }) {
         user_id: user.id,
       })
       .then((response) => {
-        console.log(response.data);
+        response.data && window.location.replace(`/posts/${post_id}`);
       });
   };
 
