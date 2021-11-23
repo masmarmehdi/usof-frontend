@@ -1,0 +1,47 @@
+.update-delete-comment {
+  display: flex;
+  justify-content: space-between;
+}
+.edit-comment-btn,
+.delete-comment-btn,
+.save-comment-btn,
+.edit-comment-btn {
+  border: 0;
+  border-radius: 2px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #14274e;
+  color: #f1f6f9;
+  box-shadow: 5px 5px 14px 0px rgba(0, 0, 0, 0.26);
+  font-size: 15px;
+  cursor: pointer;
+}
+.save-comment-btn:hover {
+  background-color: #289672;
+  color: #f1f6f9;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.edit-comment-btn:hover {
+  background: #e9ac29;
+  color: #14274e;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.delete-comment-btn:hover {
+  background: #df254d;
+  color: #f1f6f9;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.26);
+  transition: 0.8s;
+  border-radius: 5%;
+}
+.update-comment-form {
+  width: 100%;
+  padding: 5px 10px;
+}
+.comment-form {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
