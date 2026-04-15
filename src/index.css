@@ -1,13 +1,296 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* === Brand Colors === */
+  --primary: #1E293B;          /* Slate-800 — primary text & dark elements */
+  --primary-light: #334155;    /* Slate-700 */
+  --primary-dark: #0F172A;     /* Slate-900 */
+
+  /* Accent — Indigo (interactive elements, links, highlights) */
+  --accent: #6366F1;
+  --accent-hover: #4F46E5;
+  --accent-light: #818CF8;
+  --accent-pale: #EEF2FF;      /* Very light indigo for tag backgrounds */
+  --accent-border: #C7D2FE;    /* Indigo-200 for borders */
+
+  /* Legacy alias so existing components still work */
+  --secondary: #6366F1;
+  --secondary-light: #EEF2FF;
+  --secondary-dark: #4F46E5;
+
+  /* === Background & Surface === */
+  --bg-app: #F1F5F9;           /* Cool slate background */
+  --bg-card: #FFFFFF;          /* Card/panel surface */
+  --bg-subtle: #F8FAFC;        /* Slightly off-white inner areas */
+
+  /* === Text === */
+  --text-primary: #1E293B;     /* Main body text */
+  --text-secondary: #64748B;   /* Muted/meta text */
+  --text-muted: #94A3B8;       /* Placeholder / disabled */
+  --text-link: #6366F1;        /* Link color */
+
+  /* === Border === */
+  --border: #E2E8F0;           /* Default border (slate-200) */
+  --border-strong: #CBD5E1;    /* Stronger border */
+
+  /* === Neutral Grays === */
+  --white: #FFFFFF;
+  --gray-50: #F8FAFC;
+  --gray-100: #F1F5F9;
+  --gray-200: #E2E8F0;
+  --gray-300: #CBD5E1;
+  --gray-400: #94A3B8;
+  --gray-500: #64748B;
+  --gray-600: #475569;
+  --gray-700: #334155;
+  --gray-800: #1E293B;
+  --gray-900: #0F172A;
+
+  /* === Status Colors === */
+  --success: #059669;          /* Emerald-600 — answered, upvote */
+  --success-light: #D1FAE5;    /* Emerald-100 */
+  --error: #DC2626;            /* Red-600 */
+  --error-light: #FEE2E2;      /* Red-100 */
+  --warning: #D97706;          /* Amber-600 */
+  --warning-light: #FEF3C7;    /* Amber-100 */
+  --info: #0284C7;             /* Sky-600 */
+  --info-light: #E0F2FE;       /* Sky-100 */
+
+  /* === Q&A Specific === */
+  --vote-up: #16A34A;
+  --vote-down: #DC2626;
+  --answered-bg: #D1FAE5;
+  --answered-text: #065F46;
+  --tag-bg: #F1F5F9;
+  --tag-text: #475569;
+  --tag-border: #CBD5E1;
+  --tag-hover-bg: #EEF2FF;
+  --tag-hover-text: #4338CA;
+
+  /* === Spacing === */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* === Border Radius === */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px rgba(15, 23, 42, 0.07), 0 2px 4px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px rgba(15, 23, 42, 0.08), 0 4px 6px rgba(15, 23, 42, 0.05);
+  --shadow-xl: 0 20px 25px rgba(15, 23, 42, 0.10), 0 10px 10px rgba(15, 23, 42, 0.04);
+  --shadow-accent: 0 0 0 3px rgba(99, 102, 241, 0.15);
+
+  /* === Transitions === */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 15px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+  font-size: 0.9em;
+  background: var(--gray-100);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-link);
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* === Shared utility: loader spinner === */
+.loader {
+  font-size: 10px;
+  margin: 60px auto;
+  text-indent: -9999em;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 5px solid var(--gray-200);
+  border-top-color: var(--accent);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* === Shared utility: skeleton shimmer === */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease infinite;
+}
+
+/* === Shared utility: skeleton post card === */
+.skeleton-post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-title  { height: 20px; width: 65%; }
+.skeleton-meta   { height: 12px; width: 40%; }
+.skeleton-body   { width: 100%; }
+.skeleton-body.short { width: 80%; }
+
+/* === Shared utility: page skeleton wrapper === */
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* === Shared form styles used across Login, Register, Settings === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-label i {
+  color: var(--accent);
+  font-size: 12px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--bg-subtle);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-input:focus {
+  border-color: var(--accent);
+  background: var(--white);
+  box-shadow: var(--shadow-accent);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--error-light);
+  border: 1px solid #FECACA;
+  border-radius: var(--radius-sm);
+  color: var(--error);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.error-message i {
+  flex-shrink: 0;
+}
+
+/* .btn-submit: used by Login & Register forms.
+   Width is set to 100% inside those forms specifically (see login.css / register.css).
+   Do NOT set width: 100% here — it would stretch buttons in other contexts. */
+.btn-submit {
+  padding: 12px 24px;
+  background: var(--accent);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-submit:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
 }
