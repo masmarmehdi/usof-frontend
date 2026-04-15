@@ -1,71 +1,58 @@
+/* ====================================
+   HOME PAGE
+   ==================================== */
+
 .home {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-xl) var(--spacing-xl);
+  gap: var(--spacing-xl);
 }
-.loader {
-  font-size: 10px;
-  margin: 50px auto;
-  text-indent: -9999em;
-  width: 11em;
-  height: 11em;
-  border-radius: 50%;
-  background: #14274e;
-  background: -moz-linear-gradient(left, #14274e 10%, rgba(49, 75, 175, 0) 42%);
-  background: -webkit-linear-gradient(
-    left,
-    #14274e 10%,
-    rgba(49, 75, 175, 0) 42%
-  );
-  background: -o-linear-gradient(left, #14274e 10%, rgba(49, 75, 175, 0) 42%);
-  background: -ms-linear-gradient(left, #14274e 10%, rgba(49, 75, 175, 0) 42%);
-  background: linear-gradient(to right, #14274e 10%, rgba(49, 75, 175, 0) 42%);
-  position: relative;
-  -webkit-animation: load3 1.4s infinite linear;
-  animation: load3 1.4s infinite linear;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
+
+.home-content {
+  flex: 9;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
-.loader:before {
-  width: 50%;
-  height: 50%;
-  background: #14274e;
-  border-radius: 100% 0 0 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  content: "";
+
+/* Questions list wrapper — add card chrome around the list */
+.home-content .posts {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xs);
+  overflow: hidden;
 }
-.loader:after {
-  background: #f4f5f5;
-  width: 75%;
-  height: 75%;
-  border-radius: 50%;
-  content: "";
-  margin: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+
+/* === Loading === */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  width: 100%;
 }
-@-webkit-keyframes load3 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .home {
+    flex-direction: column;
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
   }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+
+  .home-content {
+    width: 100%;
   }
 }
-@keyframes load3 {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
+
+@media (max-width: 768px) {
+  .home {
+    padding: var(--spacing-sm) var(--spacing-md);
+    gap: var(--spacing-md);
   }
 }

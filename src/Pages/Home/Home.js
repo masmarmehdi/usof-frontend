@@ -33,21 +33,32 @@ export default function Home() {
     <div>
       <Header />
       <div className="home">
-        {loading ? (
-          <div className="loader">Loading</div>
-        ) : (
-          <>
+        <div className="home-content">
+          {loading ? (
+            <div className="skeleton-list">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <div key={n} className="skeleton-post-card">
+                  <div className="skeleton-line skeleton-title"></div>
+                  <div className="skeleton-line skeleton-meta"></div>
+                  <div className="skeleton-line skeleton-body"></div>
+                  <div className="skeleton-line skeleton-body short"></div>
+                </div>
+              ))}
+            </div>
+          ) : (
             <Posts posts={currentPosts} />
-
-            <SideBar />
-          </>
-        )}
+          )}
+        </div>
+        <SideBar />
       </div>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
-      />
+      {!loading && (
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      )}
     </div>
   );
 }
