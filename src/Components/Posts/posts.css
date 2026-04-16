@@ -1,6 +1,13 @@
+/* Q&A Question List — stack vertically like Stack Overflow */
 .posts {
-  flex: 9;
   display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .posts {
+    gap: 0;
+  }
 }

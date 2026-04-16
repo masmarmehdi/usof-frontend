@@ -9,143 +9,229 @@ import CreatePostLikeDislike from "../CreatePostLikeDislike/CreatePostLikeDislik
 import { Context } from "../../context/Context";
 
 export default function SinglePost() {
-  const auth_user = useContext(Context);
+  const { user: authUser } = useContext(Context);
   const location = useLocation();
   const post_id = location.pathname.split("/")[2];
-  const [post, setpost] = useState({});
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(true);
+
+  const [post, setPost] = useState({});
+  const [author, setAuthor] = useState({});
   const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showComments, setShowComments] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/posts/${post_id}`).then((response) => {
-      setpost(response.data);
+    axios.get(`http://localhost:8000/api/posts/${post_id}`).then((res) => {
+      setPost(res.data);
       setLoading(false);
     });
   }, [post_id]);
-  const user_id = post.user_id;
+
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/users/${user_id}`).then((response) => {
-      setUser(response.data);
-    });
-  }, [user_id]);
+    if (!post.user_id) return;
+    axios
+      .get(`http://localhost:8000/api/users/${post.user_id}`)
+      .then((res) => setAuthor(res.data));
+  }, [post.user_id]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/api/posts/${post_id}/comments`)
-      .then((res) => {
-        setComments(res.data);
-      });
+      .then((res) => setComments(res.data));
   }, [post_id]);
-  let display = false;
-
-  const handleComments = () => {
-    if (!display) {
-      document.getElementById("show-comments").style = "display:inherit;";
-      display = true;
-    } else {
-      document.getElementById("show-comments").style = "display:none";
-      display = false;
-    }
-  };
 
   const deletePost = async () => {
-    await axios
-      .delete(`http://localhost:8000/api/posts/${post_id}`, {
-        user_id: user.id,
-      })
-      .then((response) => {
-        response.data && history.push(`/users/${user.id}/posts`);
-      });
+    await axios.delete(`http://localhost:8000/api/posts/${post_id}`);
+    history.push(`/users/${author.id}/posts`);
   };
+
+  if (loading) {
+    return (
+      <div className="single-post-page">
+        <article className="post-card">
+          <div className="post-card-content">
+
+            {/* Title */}
+            <div className="sp-sk-title-row">
+              <div className="skeleton-line sp-sk-title"></div>
+              <div className="skeleton-line sp-sk-title short"></div>
+            </div>
+
+            {/* Meta */}
+            <div className="sp-sk-meta">
+              <div className="skeleton-line sp-sk-avatar"></div>
+              <div className="sp-sk-author-info">
+                <div className="skeleton-line sp-sk-name"></div>
+                <div className="skeleton-line sp-sk-role"></div>
+              </div>
+              <div className="skeleton-line sp-sk-date"></div>
+            </div>
+
+            {/* Tags */}
+            <div className="sp-sk-tags">
+              <div className="skeleton-line sp-sk-tag"></div>
+              <div className="skeleton-line sp-sk-tag"></div>
+              <div className="skeleton-line sp-sk-tag"></div>
+            </div>
+
+            {/* Content + image */}
+            <div className="sp-sk-body">
+              <div className="sp-sk-lines">
+                <div className="skeleton-line skeleton-body"></div>
+                <div className="skeleton-line skeleton-body"></div>
+                <div className="skeleton-line skeleton-body short"></div>
+                <div className="skeleton-line skeleton-body"></div>
+                <div className="skeleton-line skeleton-body short"></div>
+              </div>
+              <div className="skeleton-line sp-sk-image"></div>
+            </div>
+
+          </div>
+        </article>
+      </div>
+    );
+  }
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = Math.abs(now - date);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays === 0) return "Today";
+    if (diffDays === 1) return "Yesterday";
+    if (diffDays < 7) return `${diffDays} days ago`;
+    if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+    return date.toLocaleDateString("en-US", { 
+      month: "long", 
+      day: "numeric", 
+      year: "numeric" 
+    });
+  };
+
   return (
-    <div className="single-post">
-      {loading ? (
-        <div className="loader">Loading</div>
-      ) : (
-        <div>
-          <h1 style={{ marginLeft: 20 }}>
-            {user.username}'s post about {post.categories}
-          </h1>
-          <div className="single-post-wrapper">
-            <div className="single-post-header">
-              <h1 className="single-post-title">{post.title}</h1>
-              {post.user_id === auth_user.user.id && (
-                <div>
-                  <Link
-                    className="link update-post-btn"
-                    to={`/posts/${post.id}/update`}
+    <div className="single-post-page">
+      <article className="post-card">
+        <div className="post-card-content">
+          {/* Header */}
+          <header className="post-header">
+            <div className="post-header-content">
+              <h1 className="post-title">{post.title}</h1>
+              {post.user_id === authUser?.id && (
+                <div className="post-actions">
+                  <Link 
+                    to={`/posts/${post.id}/update`} 
+                    className="btn-action btn-edit"
+                    title="Edit post"
                   >
-                    Update
+                    <i className="fas fa-edit"></i> Edit
                   </Link>
-                  <span className="delete-post-btn" onClick={deletePost}>
-                    Delete
-                  </span>
+                  <button 
+                    className="btn-action btn-delete" 
+                    onClick={deletePost}
+                    title="Delete post"
+                  >
+                    <i className="fas fa-trash"></i> Delete
+                  </button>
                 </div>
               )}
             </div>
-            <div className="single-post-data">
-              <span className="post-author">
-                <Link className="link" to={"/users/" + post.user_id}>
-                  <img
-                    className="author-img"
-                    src={`http://localhost:8000/profile_pictures/${user.profilePicture}`}
-                    alt={`${user.username}'s avatar`}
-                  />
-                </Link>
-                <Link className="link" to={"/users/" + post.user_id}>
-                  <p className="author-username">{user.username}</p>
-                </Link>
-              </span>
-              <div className="single-post-categories">
-                {post.categories
-                  ? post.categories
-                      .split(" ")
-                      .map((category) => (
-                        <li className="single-post-category">{category}</li>
-                      ))
-                  : null}
+          </header>
+
+          {/* Meta */}
+          <div className="post-meta">
+            <Link to={`/users/${author.id}`} className="author">
+              <img
+                src={`http://localhost:8000/profile_pictures/${author.profilePicture}`}
+                alt={author.username}
+                className="author-avatar"
+              />
+              <div className="author-info">
+                <span className="author-name">{author.username}</span>
+                <span className="author-role">{author.role || "User"}</span>
               </div>
-              <span className="single-post-date">
-                {new Date(post.created_at).toDateString()}
+            </Link>
+            <div className="post-meta-right">
+              <span className="post-date">
+                <i className="far fa-clock"></i>
+                {formatDate(post.created_at)}
               </span>
             </div>
-            <p className="single-post-content">{post.content}</p>
+          </div>
 
-            <div className="single-post-images">
-              {post.images
-                ? post.images.split("|").map((image) =>
-                    image !== "" ? (
-                      <div className="post-images">
-                        <img
-                          key={image}
-                          className="single-post-img"
-                          src={`http://localhost:8000/posts_picture/${image}`}
-                          alt={`${user.username}'s post images`}
-                        />
-                      </div>
-                    ) : null
-                  )
-                : null}
+          {/* Categories */}
+          {post.categories && (
+            <div className="post-tags">
+              {post.categories.split(" ").map((cat, index) => (
+                <span key={index} className="tag">
+                  <i className="fas fa-tag"></i> {cat}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Content + Images side by side */}
+          <div className="post-body-row">
+            <div className="single-post-content">
+              <div className="content-text">{post.content}</div>
             </div>
 
-            <div className="activity">
-              <CreatePostLikeDislike post={post} post_id={post_id} />
-              <div onClick={handleComments} style={{ cursor: "pointer" }}>
-                <i class="far comment fa-comments">
-                  <span className="count">{comments.length}</span>
-                </i>
+            {post.images && post.images.split("|").some(img => img !== "") && (
+              <div className="post-images">
+                {post.images.split("|").map(
+                  (img, index) =>
+                    img && (
+                      <img
+                        key={index}
+                        src={`http://localhost:8000/posts_picture/${img}`}
+                        alt={`Post image ${index + 1}`}
+                        className="post-image"
+                      />
+                    )
+                )}
               </div>
-            </div>
-            <CreateComment post_id={post_id} />
-            <Comments
-              className="show-comments"
-              post={post}
-              comments={comments}
-            />
+            )}
           </div>
         </div>
-      )}
+
+        <div className="post-card-content">
+          {/* Footer Actions */}
+          <footer className="post-footer">
+            <div className="post-actions-left">
+              <CreatePostLikeDislike post={post} post_id={post_id} />
+            </div>
+            <button
+              className="comment-toggle"
+              onClick={() => setShowComments(!showComments)}
+            >
+              <i className="fas fa-comments"></i>
+              <span>{comments.length} {comments.length === 1 ? 'Answer' : 'Answers'}</span>
+              <i className={`fas fa-chevron-${showComments ? 'up' : 'down'}`}></i>
+            </button>
+          </footer>
+
+          {/* Divider */}
+          <div className="post-divider"></div>
+
+          {/* Comments Section */}
+          <div className="comments-section">
+            <CreateComment post_id={post_id} />
+
+            {showComments && (
+              <div className="comments-container">
+                <div className="comments-header">
+                  <h3>
+                    <i className="fas fa-comments"></i> 
+                    {comments.length} {comments.length === 1 ? 'Answer' : 'Answers'}
+                  </h3>
+                </div>
+                <Comments post={post} comments={comments} />
+              </div>
+            )}
+          </div>
+        </div>
+      </article>
     </div>
   );
 }
