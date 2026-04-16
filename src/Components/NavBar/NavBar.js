@@ -20,6 +20,8 @@ export default function NavBar() {
   }, []);
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/api/users").then((response) => {
+      console.log(response.data);
+      
       setUsers(response.data);
     });
   }, []);
@@ -104,49 +106,53 @@ export default function NavBar() {
       </div>
       <div className="navlink-center">
         <ul className="nav-list">
-          <li className="nav-link">
-            <Link className="link" to="/">
+          <li>
+            <Link className="nav-link" to="/">
               Posts
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="link" to="/post/create">
+          <li>
+            <Link className="nav-link" to="/post/create">
               Create a post
             </Link>
           </li>
-          <li className="nav-link">
-            <Link className="link" to="/categories">
+          <li>
+            <Link className="nav-link" to="/categories">
               Categories
             </Link>
           </li>
-          <li className="nav-link">
-            {user && (
-              <Link className="link" to={`/users/${user.id}/posts`}>
+          {user && (
+            <li>
+              <Link className="nav-link" to={`/users/${user.id}/posts`}>
                 My posts
               </Link>
-            )}
-          </li>
-          <li className="nav-link">
-            {user && (
-              <Link className="link" to="/settings">
+            </li>
+          )}
+          {user && (
+            <li>
+              <Link className="nav-link" to="/settings">
                 Settings
               </Link>
-            )}
-          </li>
-          <li className="search-container">
-            <input
-              type="search"
-              className="search-input"
-              onChange={(e) => search(e.target.value)}
-              placeholder="looking for something?"
-            />
+            </li>
+          )}
+        </ul>
+      </div>
+      <div className="navlink-search">
+        <div className="search-wrapper">
+          <i className="fas fa-search search-icon-input"></i>
+          <input
+            type="search"
+            className="search-input"
+            onChange={(e) => search(e.target.value)}
+            placeholder="Search..."
+          />
+          {result && result.length > 0 && (
             <div className="search-bar">
               <ul className="search-result">{result}</ul>
             </div>
-          </li>
-        </ul>
+          )}
+        </div>
       </div>
-
       {user ? (
         <div className="navlink-right">
           <p className="user-role">
@@ -160,31 +166,30 @@ export default function NavBar() {
                 {user.role}
               </a>
             ) : (
-              <p>{user.role}</p>
+              <span>{user.role}</span>
             )}
           </p>
           <Link className="link" to={`/users/${user.id}`}>
             <img
               className="user-img"
               src={`http://127.0.0.1:8000/profile_pictures/${user.profilePicture}`}
-              alt=""
+              alt={user.profilePicture}
             />
           </Link>
           <Link className="link nav-link" to={`/users/${user.id}`}>
             <span>{user.username}</span>
           </Link>
-
-          <button class="logout-btn" onClick={handleLogout}>
+          <button className="logout-btn" onClick={handleLogout}>
             Logout
           </button>
         </div>
       ) : (
         <div className="navlink-right">
           <Link className="link" to="/login">
-            <button class="login-btn">Login</button>
+            <button className="login-btn">Login</button>
           </Link>
           <Link className="link" to="/register">
-            <button class="register-btn">Register</button>
+            <button className="register-btn">Register</button>
           </Link>
         </div>
       )}

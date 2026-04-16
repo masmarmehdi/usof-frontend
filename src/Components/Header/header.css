@@ -1,18 +1,115 @@
+/* ====================================
+   HERO HEADER — Q&A Platform
+   ==================================== */
+
 .header {
   display: flex;
+  align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, #1a1f3a 50%, #0c1445 100%);
+  padding: var(--spacing-2xl) var(--spacing-xl);
+  min-height: 200px;
 }
 
-.header-title {
+/* Decorative grid pattern */
+.header::before {
+  content: '';
   position: absolute;
-  color: #14274e;
-  top: 20%;
-  font-size: 60px;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(99, 102, 241, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99, 102, 241, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+/* Glow blobs */
+.header::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .header-cover {
-  background-color: #a2dbfa;
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+  display: none; /* replaced by header background */
+}
+
+.header-title {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  text-align: center;
+}
+
+.header-title span {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -1px;
+  line-height: 1.15;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+.header-title span em {
+  font-style: normal;
+  color: var(--accent-light);
+}
+
+/* Subtitle text injected via pseudo — only appears in CSS */
+.header-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* Accent bar under headline */
+.header-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin-top: var(--spacing-sm);
+}
+
+/* Left glow blob */
+.header-left-blob {
+  position: absolute;
+  bottom: -60px;
+  left: -60px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: var(--spacing-xl) var(--spacing-md);
+    min-height: 160px;
+  }
+
+  .header-title span {
+    font-size: 28px;
+    letter-spacing: -0.5px;
+  }
+
+  .header-subtitle {
+    font-size: 14px;
+  }
 }
